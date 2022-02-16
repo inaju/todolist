@@ -1,0 +1,12 @@
+.welcome__container{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+
+}
+.welcome__container-img img{
+    width:15rem;
+
+    margin-top:5rem;
+}

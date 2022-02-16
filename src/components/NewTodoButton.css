@@ -1,0 +1,8 @@
+.newtodobutton__container{
+    position: fixed;
+    bottom: 8rem;
+    right:1.5rem;
+}
+.newtodobutton__container:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,22 @@
+.logincard__container{
+    border-radius: 10px;
+    border: 2px solid rgb(224, 223, 223);
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    margin:2rem 1rem 2rem 1rem;
+    width:80vw;
+    height:4rem;
+}
+.logincard__container:hover{
+cursor:pointer;
+}
+
+.logincard__container  img{
+width:2rem;
+}
+
+.logincard__container  p{
+margin-right:3rem;
+}
+

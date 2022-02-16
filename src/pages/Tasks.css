@@ -1,0 +1,14 @@
+.tasks__container{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+@media screen and (max-width:400px) {
+
+    .tasks__container-newtodo{
+        /* margin-left:10rem; */
+    }
+
+}
