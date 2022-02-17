@@ -11,7 +11,7 @@
 
 .newtodo__container-parent {
   position: absolute;
-  top: 30%;
+  top: 10rem;
   left:5%;
   right:auto;
   margin:0 2rem 0 0rem;
@@ -65,6 +65,17 @@ font-size: 1.5rem;
 .newtodo__container-parent_save:hover{
     cursor: pointer;
 
+}
+
+.newtodo__container-calender{
+    position:relative;
+}
+.newtodo__container-selected_date{
+    margin-left: 2rem;
+}
+.show{
+    display: none;
+    visibility: none;
 }
 
 

@@ -4,12 +4,14 @@ import Calendar from "react-calendar";
 // import '../react-calendar/dist/Calendar.css';
 import "./Calender.css";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentDate, setShowCalender, setToggle } from "../redux/slice";
+import { setCurrentDate, setShowCalender, setToggle,setShowTodoSpace} from "../redux/slice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Calender() {
   const [date, setDate] = useState(new Date());
+  const showTodoSpace= useSelector((state) => state.counter.showTodoSpace);
+
 
   const currentDate = useSelector((state) => state.counter.currentDate);
   const showCalender = useSelector((state) => state.counter.showCalender);
@@ -34,8 +36,11 @@ function Calender() {
       <button
         onClick={() => {
           dispatch(setCurrentDate(date.toDateString()));
-          // dispatch(setShowCalender());
+          console.log(currentDate)
           dispatch(setShowCalender());
+          dispatch(setShowTodoSpace())
+          // dispatch(setShowCalender());
+          // dispatch(setToggle())
           // dispatch(setToggle());
 
         }}

@@ -35,19 +35,32 @@ const [status,setStatus] = useState(false)
             // dispatch(todoUpdate(id));
           }}
         >
+
           {checkStatus(status) == "done" ? (
             <AiOutlineCheck size={30} color="#1167B1" />
           ) : (
             <AiOutlineClockCircle size={30} color="#272A3B" />
           )}
         </div>
+
+
         <div className="tasktab__container-task_item">
           <p>
             <b>{task}</b>
           </p>
           <p>{time}</p>
         </div>
+        
       </div>
+
+
+
+
+
+
+
+
+
       <div
         className="tasktab__container-task_priority"
         onClick={() => {

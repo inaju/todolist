@@ -4,16 +4,17 @@ import { IoMdList } from "react-icons/io";
 import { BsCalendar2Event, BsFillMicFill } from "react-icons/bs";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setToggle, setTodoList, setShowCalender } from "../redux/slice";
+import { setToggle, setTodoList, setShowCalender,setShowTodoSpace } from "../redux/slice";
 import Calender from "../components/Calender";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "../../node_modules/react-toastify/dist/ReactToastify.css";
 
 const NewTodo = () => {
   const toggle = useSelector((state) => state.counter.toggle);
   const todolist = useSelector((state) => state.counter.todolist);
   const showCalender = useSelector((state) => state.counter.showCalender);
   const currentDate = useSelector((state) => state.counter.currentDate);
+  const showTodoSpace= useSelector((state) => state.counter.showTodoSpace);
 
   const [error, setError] = useState("");
   const [input, setInput] = useState({
@@ -23,10 +24,7 @@ const NewTodo = () => {
     priority: "low",
   });
 
-  
-  console.log(showCalender);
-  // const [showCalender, setShowCalender] = useState(false);
-  const [showTodoSpace, setshowTodoSpace] = useState(false);
+  // const [showTodoSpace, setshowTodoSpace] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -46,35 +44,44 @@ const NewTodo = () => {
   const todoSuccessful = () => toast("Todo Saved Successfully");
 
   const todoSaveFunc = (e) => {
-    console.log(input,currentDate)
-  
-    if (input != "") {
-      input["date"] = currentDate.payload;
-      
+    // dispatch(setTodoList(input));
 
-      dispatch(setTodoList(input));
-      
-      console.log("Saved")
-      
-      dispatch(setToggle());
-      todoSuccessful()
-
-
-    } else if (input == "") {
+    console.log(input);
+    console.log(input["date"])
+    if (input["todo"] === '' || input["todo"].length===0) {
       emptyInput();
-    } else {
+    } 
+
+    if (input["date"] === "" || input["date"] === undefined) {
       emptyDate();
     }
+
+    if (input["todo"] != "" && (input["date"] != undefined || input["date"] === "" )) {
+      input["date"] = currentDate.payload;
+
+      dispatch(setTodoList(input));
+      // console.log(input["todo"])
+      // console.log(input["date"])
+      console.log("Saved");
+
+      dispatch(setToggle());
+      todoSuccessful();
+
+    }
+    
   };
 
   return (
     <div className="newtodo__container">
       <div className="newtodo__container-parent">
-        {showCalender && <Calender />}
+    
+      <div className={showTodoSpace==true ? `newtodo__container-calender ` : `newtodo__container-calender show`}>
+          <Calender />
 
-        {!showTodoSpace && (
-          <form action="">
-            <ToastContainer />
+        </div>
+        
+         <form  className={showTodoSpace==true ? `show` : ` `} action="">
+            <ToastContainer hideProgressBar/>
             <input
               contenteditable="true"
               required
@@ -87,10 +94,11 @@ const NewTodo = () => {
                   date: currentDate,
                   todo: e.target.value,
                 });
-                console.log(input)
-                // todoSaveFunc(e);
               }}
             />
+            <p className="newtodo__container-selected_date">
+              {currentDate['payload']}
+            </p>
 
             <div className="newtodo__container-parent_bottom">
               <div className="newtodo__container-parent_icons">
@@ -98,9 +106,8 @@ const NewTodo = () => {
                 <BsCalendar2Event
                   size={23}
                   onClick={() => {
-                    setshowTodoSpace(!showTodoSpace);
+                    dispatch(setShowTodoSpace());
                     dispatch(setShowCalender());
-                    // dispatch(setToggle());
                   }}
                 />
                 <BsFillMicFill size={23} />
@@ -109,16 +116,19 @@ const NewTodo = () => {
               <div className="newtodo__container-parent_save">
                 <p
                   onClick={(e) => {
-                    todoSaveFunc();
+                    todoSaveFunc(e);
                   }}
                 >
                   Save
                 </p>
-                {console.log(todolist)}
+                {/* {console.log(todolist)} */}
               </div>
             </div>
           </form>
-        )}
+
+        {/* {!showTodoSpace && (
+         
+        )} */}
       </div>
     </div>
   );

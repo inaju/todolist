@@ -27,7 +27,6 @@ const Tasks = () => {
     <div className="tasks__container align__main">
       <TopBar />
       
-      {/* {console.log(todolist)} */}
       {todolist
         .slice(0)
         .reverse()
@@ -36,7 +35,7 @@ const Tasks = () => {
             <TaskTab
               id={i["payload"]["id"]}
               status={"not_done"}
-              time={"8:00"}
+              time={i["payload"]["date"]}
               task={i["payload"]["todo"]}
               priority={"low"}
             />
@@ -53,21 +52,7 @@ const Tasks = () => {
         />
       ))}
 
-      {/* {todolist.length == 0 ? <p className="">Create a Todo</p> : <p> " "</p>}
-      {console.log(todolist.length)} */}
-
-      {/* <TaskTab
-        status={"done"}
-        time={"8:00"}
-        task={"Go to Work"}
-        priority={"high"}
-      />
-      <TaskTab
-        status={"not_done"}
-        time={"6:00"}
-        task={"wash Plates"}
-        priority={"low"}
-      /> */}
+    
 
       {toggle && (
         <div className="tasks__container-newtodo">
@@ -82,11 +67,11 @@ const Tasks = () => {
         <NewTodoButton />
       </div>
 
-      {showCalender && (
+      {/* {showCalender && (
         <div className="tasks__container-newtodo">
           <Calendar />{" "}
         </div>
-      )}
+      )} */}
 
       <Navbar />
     </div>
